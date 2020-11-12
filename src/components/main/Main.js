@@ -2,7 +2,7 @@ import { Switch, Route } from "react-router-dom";
 
 import styles from "./Main.module.scss";
 
-import Rules from "../../views/rules/Rules";
+import Home from "../../views/home/Home";
 import Play from "../../views/play/Play";
 
 const Main = () => {
@@ -13,7 +13,7 @@ const Main = () => {
           <Play />
         </Route>
         <Route path="/">
-          <Rules />
+          <Home />
         </Route>
       </Switch>
     </main>
