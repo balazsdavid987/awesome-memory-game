@@ -1,6 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import { startNewGame } from "../../actions";
 
+import { useLocation, useHistory } from "react-router-dom";
+
 //import styles from "./StartNewGame.module.scss";
 
 import Button from "../../components/button/Button";
@@ -23,6 +25,8 @@ const cardTypes = [
 const StartNewGame = () => {
   const dispatch = useDispatch();
   const deckSize = useSelector((state) => state.game.deckSize);
+  const location = useLocation();
+  const history = useHistory();
 
   const onStartNewGame = () => {
     let cards = cardTypes.slice(0, deckSize);
@@ -34,8 +38,12 @@ const StartNewGame = () => {
       disabled: false,
       id: i,
     }));
-    //console.log(deck);
     dispatch(startNewGame(deck));
+
+    // időlimit miatt quickfix
+    if (location.pathname !== "/play") {
+      history.push("/play");
+    }
   };
 
   return (

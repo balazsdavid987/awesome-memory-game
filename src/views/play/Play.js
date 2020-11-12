@@ -3,7 +3,6 @@ import { flipCard, disableCard, incrementMoves, setBest } from "../../actions";
 
 import styles from "./Play.module.scss";
 
-import Button from "../../components/button/Button";
 import DeckSizeSelector from "../../components/deck-size-selector/DeckSizeSelector";
 import StartNewGame from "../../components/start-new-game/StartNewGame";
 
@@ -51,7 +50,7 @@ const Play = () => {
       (card) => !card.flipped && !card.disabled
     );
 
-    console.log(remainingCards);
+    //console.log(remainingCards);
     if (remainingCards.length === 1) {
       //alert("You won!");
       console.log(moves, best[decksize]);
