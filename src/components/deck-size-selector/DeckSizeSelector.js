@@ -3,7 +3,7 @@ import { setDeckSize } from "../../actions";
 
 //import styles from "./DeckSizeSelector.module.scss";
 
-import Select from "../../components/select/Select";
+import Select from "../../components/ui/select/Select";
 
 const DeckSizeSelector = () => {
   const dispatch = useDispatch();

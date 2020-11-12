@@ -5,7 +5,7 @@ import { startNewGame } from "../../../actions";
 
 import styles from "./Welcome.module.scss";
 
-import Button from "../../button/Button";
+import Button from "../../ui/button/Button";
 
 import { createDeck } from "../../../utils";
 import { cardTypes } from "../../../constants";

@@ -11,7 +11,7 @@ import {
 
 import styles from "./Play.module.scss";
 
-import Button from "../../components/button/Button";
+import Button from "../../components/ui/button/Button";
 import Grid from "../../components/game/grid/Grid";
 import Moves from "../../components/game/moves/Moves";
 import Card from "../../components/game/card/Card";
