@@ -1,7 +1,7 @@
 import styles from "./Rules.module.scss";
 
 import Button from "../../components/button/Button";
-import Select from "../../components/select/Select";
+import DeckSizeSelector from "../../components/deck-size-selector/DeckSizeSelector";
 
 const Rules = () => {
   return (
@@ -24,8 +24,7 @@ const Rules = () => {
         <li>The game ends when all the cards are removed.</li>
       </ol>
       <hr />
-      Deck size:
-      <Select options={[3, 4, 5, 6, 7, 8, 9, 10]} />
+      <DeckSizeSelector />
       <Button label="Start new game" type="primary" />
       <Button label="Continue" type="secondary" />
     </>

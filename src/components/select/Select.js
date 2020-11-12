@@ -1,8 +1,12 @@
 import styles from "./Select.module.scss";
 
-const Select = ({ options }) => {
+const Select = ({ options, selected, onChange }) => {
   return (
-    <select className={styles.component}>
+    <select
+      onChange={(e) => onChange(e.target.value)}
+      className={styles.component}
+      defaultValue={selected}
+    >
       {options.map((o) => (
         <option key={o}>{o}</option>
       ))}
