@@ -7,9 +7,9 @@ const Header = () => {
     <header className={styles.component}>
       <div className={styles.container}>
         <img
-          src="images/splendex-logo.svg"
+          src="images/awesome-logo.svg"
           className={styles.logo}
-          alt="Splendex"
+          alt="Awesome Memory Game"
         />
         <nav>
           <ul className={styles.navList}>
