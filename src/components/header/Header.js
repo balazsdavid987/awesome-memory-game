@@ -15,7 +15,7 @@ const Header = () => {
           <ul className={styles.navList}>
             <li>
               <NavLink to="/" activeClassName={styles.active} exact>
-                Rules
+                Home
               </NavLink>
             </li>
             <li>
