@@ -14,7 +14,6 @@ const Rules = () => {
           </ul>
         </li>
         <li>Repeat until all cards have been flipped over.</li>
-        <li>Be aware that you only have a limited amount of moves.</li>
       </ol>
     </section>
   );
