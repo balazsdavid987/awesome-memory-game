@@ -30,18 +30,20 @@ const Welcome = () => {
   return (
     <section>
       <h1 className={styles.title}>Awesome Memory Game</h1>
-      <Button
-        label="Start new game"
-        type="primary"
-        onClick={onNewGameClicked}
-      />
-      {currentDeck !== undefined && currentDeck.length !== 0 && (
+      <div className={styles.cta}>
         <Button
-          label="Continue game"
-          type="secondary"
-          onClick={onContinueGameClicked}
+          label="Start new game"
+          type="primary"
+          onClick={onNewGameClicked}
         />
-      )}
+        {currentDeck !== undefined && currentDeck.length !== 0 && (
+          <Button
+            label="Continue game"
+            type="secondary"
+            onClick={onContinueGameClicked}
+          />
+        )}
+      </div>
     </section>
   );
 };
