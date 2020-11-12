@@ -1,5 +1,3 @@
-import styles from "./Settings.module.scss";
-
 import DeckSizeSelector from "../../deck-size-selector/DeckSizeSelector";
 
 const Settings = () => {
