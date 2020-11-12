@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import { useSelector, useDispatch } from "react-redux";
 import { flipCard, disableCard, incrementMoves, setBest } from "../../actions";
 
@@ -15,6 +17,18 @@ const Play = () => {
   const decksize = currentDeck.length / 2;
   const moves = useSelector((state) => state.game.moves);
   const best = useSelector((state) => state.game.best);
+
+  useEffect(() => {
+    const remainingCards = currentDeck.filter(
+      (card) => !card.flipped && !card.disabled
+    );
+
+    if (remainingCards.length === 0) {
+      if (best[decksize] === 0 || moves < best[decksize]) {
+        dispatch(setBest(decksize, moves));
+      }
+    }
+  });
 
   const onCardClicked = (id) => {
     if (currentDeck[id].disabled || currentDeck[id].flipped) {
@@ -42,21 +56,6 @@ const Play = () => {
       dispatch(incrementMoves());
     } else {
       dispatch(flipCard(id));
-    }
-
-    // ezt teljesen máshogy kéne kezelni,
-    // de bele akartam férni az időkeretbe
-    const remainingCards = currentDeck.filter(
-      (card) => !card.flipped && !card.disabled
-    );
-
-    //console.log(remainingCards);
-    if (remainingCards.length === 1) {
-      //alert("You won!");
-      console.log(moves, best[decksize]);
-      if (best[decksize] === 0 || moves < best[decksize]) {
-        dispatch(setBest(decksize, moves));
-      }
     }
   };
 
