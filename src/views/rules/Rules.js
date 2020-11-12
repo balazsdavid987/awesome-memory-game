@@ -24,6 +24,7 @@ const Rules = () => {
         <li>The game ends when all the cards are removed.</li>
       </ol>
       <hr />
+      Deck size:
       <Select options={[3, 4, 5, 6, 7, 8, 9, 10]} />
       <Button label="Start new game" type="primary" />
       <Button label="Continue" type="secondary" />

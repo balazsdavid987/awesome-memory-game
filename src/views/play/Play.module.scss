@@ -1,0 +1,12 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.stats {
+  font-size: 1.5rem;
+
+  span {
+    font-weight: 600;
+  }
+}

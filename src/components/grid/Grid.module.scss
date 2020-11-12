@@ -1,0 +1,5 @@
+.component {
+  display: grid;
+  grid-gap: 25px;
+  grid-template-columns: repeat(5, 1fr);
+}
