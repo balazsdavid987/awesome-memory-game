@@ -1,9 +1,14 @@
+import { useSelector, useDispatch } from "react-redux";
+
 import styles from "./Rules.module.scss";
 
 import Button from "../../components/button/Button";
 import DeckSizeSelector from "../../components/deck-size-selector/DeckSizeSelector";
+import StartNewGame from "../../components/start-new-game/StartNewGame";
 
 const Rules = () => {
+  const currentDeck = useSelector((state) => state.game.currentDeck);
+
   return (
     <>
       <h1 className={styles.title}>Splendex Memory Game</h1>
@@ -25,8 +30,11 @@ const Rules = () => {
       </ol>
       <hr />
       <DeckSizeSelector />
-      <Button label="Start new game" type="primary" />
-      <Button label="Continue" type="secondary" />
+      <StartNewGame />
+      {/*
+      {currentDeck !== undefined && currentDeck.length !== 0 && (
+        <Button label="Continue game" type="secondary" />
+      )}*/}
     </>
   );
 };
