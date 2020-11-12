@@ -1,20 +1,27 @@
 import { useEffect } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
-import { flipCard, disableCard, incrementMoves, setBest } from "../../actions";
+import {
+  startNewGame,
+  flipCard,
+  disableCard,
+  incrementMoves,
+  setBest,
+} from "../../actions";
 
 import styles from "./Play.module.scss";
 
-import DeckSizeSelector from "../../components/deck-size-selector/DeckSizeSelector";
-import StartNewGame from "../../components/start-new-game/StartNewGame";
-
+import Button from "../../components/button/Button";
 import Grid from "../../components/grid/Grid";
 import Card from "../../components/card/Card";
+
+import { createDeck } from "../../utils";
+import { cardTypes } from "../../constants";
 
 const Play = () => {
   const dispatch = useDispatch();
   const currentDeck = useSelector((state) => state.game.currentDeck);
-  const decksize = currentDeck.length / 2;
+  const deckSize = currentDeck.length / 2;
   const moves = useSelector((state) => state.game.moves);
   const best = useSelector((state) => state.game.best);
 
@@ -24,8 +31,8 @@ const Play = () => {
     );
 
     if (remainingCards.length === 0) {
-      if (best[decksize] === 0 || moves < best[decksize]) {
-        dispatch(setBest(decksize, moves));
+      if (best[deckSize] === 0 || moves < best[deckSize]) {
+        dispatch(setBest(deckSize, moves));
       }
     }
   });
@@ -59,6 +66,11 @@ const Play = () => {
     }
   };
 
+  const onRestartClicked = () => {
+    const deck = createDeck(cardTypes, deckSize);
+    dispatch(startNewGame(deck));
+  };
+
   return (
     <>
       <div className={styles.header}>
@@ -76,17 +88,18 @@ const Play = () => {
             <span>
               {currentDeck === undefined || currentDeck.length === 0
                 ? "-"
-                : best[decksize]}
+                : best[deckSize]}
             </span>
           </div>
         </div>
         <div className={styles.controls}>
-          {/*időhiány miatt kihagytam, de ugyanazt csinálja mint a Start New Game
           {currentDeck !== undefined && currentDeck.length !== 0 && (
-            <Button label="Restart" type="secondary" />
-          )}*/}
-          <DeckSizeSelector />
-          <StartNewGame />
+            <Button
+              label="Restart"
+              type="secondary"
+              onClick={onRestartClicked}
+            />
+          )}
         </div>
       </div>
 

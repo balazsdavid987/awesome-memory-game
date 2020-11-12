@@ -6,21 +6,8 @@ import { useLocation, useHistory } from "react-router-dom";
 //import styles from "./StartNewGame.module.scss";
 
 import Button from "../../components/button/Button";
-
-import arrayShuffle from "array-shuffle";
-
-const cardTypes = [
-  "angular",
-  "d3",
-  "jenkins",
-  "postcss",
-  "react",
-  "redux",
-  "sass",
-  "splendex",
-  "ts",
-  "webpack",
-];
+import { createDeck } from "../../utils";
+import { cardTypes } from "../../constants";
 
 const StartNewGame = () => {
   const dispatch = useDispatch();
@@ -29,15 +16,7 @@ const StartNewGame = () => {
   const history = useHistory();
 
   const onStartNewGame = () => {
-    let cards = cardTypes.slice(0, deckSize);
-    cards = cards.reduce((result, card) => [...result, card, card], []);
-    cards = arrayShuffle(cards);
-    const deck = cards.map((card, i) => ({
-      image: card,
-      flipped: false,
-      disabled: false,
-      id: i,
-    }));
+    const deck = createDeck(cardTypes, deckSize);
     dispatch(startNewGame(deck));
 
     // időlimit miatt quickfix
