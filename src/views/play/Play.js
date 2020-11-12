@@ -21,10 +21,10 @@ import { cardTypes } from "../../constants";
 
 const Play = () => {
   const dispatch = useDispatch();
-  const currentDeck = useSelector((state) => state.game.currentDeck);
-  const deckSize = useSelector((state) => state.game.deckSize);
-  const moves = useSelector((state) => state.game.moves);
-  const best = useSelector((state) => state.game.best);
+  const currentDeck = useSelector((state) => state.currentDeck);
+  const deckSize = useSelector((state) => state.deckSize);
+  const moves = useSelector((state) => state.moves);
+  const best = useSelector((state) => state.best);
 
   useEffect(() => {
     if (currentDeck === undefined || currentDeck.length === 0) {

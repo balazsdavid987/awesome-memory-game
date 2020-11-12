@@ -12,8 +12,8 @@ import { cardTypes } from "../../../constants";
 
 const Welcome = () => {
   const dispatch = useDispatch();
-  const deckSize = useSelector((state) => state.game.deckSize);
-  const currentDeck = useSelector((state) => state.game.currentDeck);
+  const deckSize = useSelector((state) => state.deckSize);
+  const currentDeck = useSelector((state) => state.currentDeck);
   const history = useHistory();
 
   const onNewGameClicked = () => {

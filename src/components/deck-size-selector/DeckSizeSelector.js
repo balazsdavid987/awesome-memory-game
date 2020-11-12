@@ -7,7 +7,7 @@ import Select from "../../components/ui/select/Select";
 
 const DeckSizeSelector = () => {
   const dispatch = useDispatch();
-  const deckSize = useSelector((state) => state.game.deckSize);
+  const deckSize = useSelector((state) => state.deckSize);
   const deckSizeOptions = [3, 4, 5, 6, 7, 8, 9, 10];
 
   const deckSizeChanged = (size) => {

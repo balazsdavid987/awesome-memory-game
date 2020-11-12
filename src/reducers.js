@@ -12,9 +12,12 @@ const initialState = {
   moves: null,
   currentDeck: [],
   best: { 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0 },
+  imageSet: "",
+  language: "en",
+  theme: "light",
 };
 
-const game = (state = initialState, action) => {
+const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_DECK_SIZE:
       return {
@@ -69,9 +72,5 @@ const game = (state = initialState, action) => {
       return state;
   }
 };
-
-const rootReducer = combineReducers({
-  game,
-});
 
 export default rootReducer;
