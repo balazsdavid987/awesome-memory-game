@@ -4,10 +4,12 @@ const Moves = ({ current, best }) => {
   return (
     <div className={styles.component}>
       <div>
-        Moves: <span>{current}</span>
+        <div>Moves:</div>
+        <div className={styles.value}>{current}</div>
       </div>
       <div>
-        Best: <span>{best}</span>
+        <div>Best:</div>
+        <div className={styles.value}>{best}</div>
       </div>
     </div>
   );

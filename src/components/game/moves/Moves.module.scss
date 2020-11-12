@@ -1,7 +1,14 @@
 .component {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  width: 150px;
 
-  span {
+  > div {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .value {
     font-weight: 600;
   }
 }
