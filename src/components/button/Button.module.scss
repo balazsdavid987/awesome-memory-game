@@ -1,0 +1,14 @@
+.component {
+  padding: 10px 20px;
+  font-weight: 500;
+  border-radius: 5px;
+
+  &.primary {
+    background-color: red;
+    color: white;
+  }
+
+  &.secondary {
+    background-color: transparent;
+  }
+}

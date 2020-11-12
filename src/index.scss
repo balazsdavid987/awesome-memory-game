@@ -1,0 +1,14 @@
+:root {
+  --header-bg: black;
+  --header-text: white;
+  --container-width: 800px;
+}
+
+body {
+  margin: 0;
+  font-family: Circular, Helvetica Neue, Helvetica, HelveticaNeue-Light,
+    Helvetica Neue Light, Arial, Lucida Grande, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5rem;
+}
