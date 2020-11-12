@@ -2,13 +2,21 @@
   padding: 10px 20px;
   font-weight: 500;
   border-radius: 5px;
+  border-width: 2px;
+  border-style: solid;
+  text-transform: uppercase;
+  font-weight: 600;
+  outline: 0;
+  cursor: pointer;
 
   &.primary {
+    border-color: red;
     background-color: red;
     color: white;
   }
 
   &.secondary {
     background-color: transparent;
+    border-color: black;
   }
 }
