@@ -12,8 +12,9 @@ import {
 import styles from "./Play.module.scss";
 
 import Button from "../../components/button/Button";
-import Grid from "../../components/grid/Grid";
-import Card from "../../components/card/Card";
+import Grid from "../../components/game/grid/Grid";
+import Moves from "../../components/game/moves/Moves";
+import Card from "../../components/game/card/Card";
 
 import { createDeck } from "../../utils";
 import { cardTypes } from "../../constants";
@@ -21,11 +22,15 @@ import { cardTypes } from "../../constants";
 const Play = () => {
   const dispatch = useDispatch();
   const currentDeck = useSelector((state) => state.game.currentDeck);
-  const deckSize = currentDeck.length / 2;
+  const deckSize = useSelector((state) => state.game.deckSize);
   const moves = useSelector((state) => state.game.moves);
   const best = useSelector((state) => state.game.best);
 
   useEffect(() => {
+    if (currentDeck === undefined || currentDeck.length === 0) {
+      return;
+    }
+
     const remainingCards = currentDeck.filter(
       (card) => !card.flipped && !card.disabled
     );
@@ -66,7 +71,7 @@ const Play = () => {
     }
   };
 
-  const onRestartClicked = () => {
+  const newGame = () => {
     const deck = createDeck(cardTypes, deckSize);
     dispatch(startNewGame(deck));
   };
@@ -74,35 +79,24 @@ const Play = () => {
   return (
     <>
       <div className={styles.header}>
-        <div className={styles.stats}>
-          <div>
-            Moves:{" "}
-            <span>
-              {currentDeck === undefined || currentDeck.length === 0
-                ? "-"
-                : moves}
-            </span>
-          </div>
-          <div>
-            Best:{" "}
-            <span>
-              {currentDeck === undefined || currentDeck.length === 0
-                ? "-"
-                : best[deckSize]}
-            </span>
-          </div>
-        </div>
+        <Moves
+          current={
+            currentDeck === undefined || currentDeck.length === 0 ? "-" : moves
+          }
+          best={
+            currentDeck === undefined || currentDeck.length === 0
+              ? "-"
+              : best[deckSize]
+          }
+        />
         <div className={styles.controls}>
-          {currentDeck !== undefined && currentDeck.length !== 0 && (
-            <Button
-              label="Restart"
-              type="secondary"
-              onClick={onRestartClicked}
-            />
+          {currentDeck !== undefined && currentDeck.length !== 0 ? (
+            <Button label="Restart" type="secondary" onClick={newGame} />
+          ) : (
+            <Button label="Start new game" type="primary" onClick={newGame} />
           )}
         </div>
       </div>
-
       <Grid>
         {currentDeck !== undefined &&
           currentDeck.length !== 0 &&
