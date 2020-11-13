@@ -51,7 +51,9 @@ const Play = () => {
     if (flippedCards.length === 2) {
       const [first, second] = flippedCards;
       if (first.image === second.image) {
-        dispatch(disableCards([first.id, second.id]));
+        setTimeout(() => {
+          dispatch(disableCards([first.id, second.id]));
+        }, 500);
       } else {
         setGridIsDisabled(true);
         setTimeout(() => {
@@ -109,6 +111,7 @@ const Play = () => {
           </div>
         </div>
       )}
+      {isOver && <div className={styles.congratulations}>Congratulations!</div>}
       <Grid disabled={gridIsDisabled}>
         {currentDeck.length !== 0 &&
           currentDeck.map(({ image, flipped, disabled, id }) => (
