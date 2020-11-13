@@ -8,7 +8,7 @@ const Card = ({ image, id, flipped, disabled, clickHandler }) => {
       }`}
       onClick={() => clickHandler(id)}
     >
-      <img src={`images/cards/${image}.png`} alt={image} />
+      <img src={`images/cards/${image}.jpg`} alt={image} draggable="false" />
     </div>
   );
 };
