@@ -3,8 +3,8 @@
     "main.css": "/awesome-memory-game/static/css/main.00857fd4.chunk.css",
     "main.js": "/awesome-memory-game/static/js/main.c29f6aeb.chunk.js",
     "main.js.map": "/awesome-memory-game/static/js/main.c29f6aeb.chunk.js.map",
-    "runtime-main.js": "/awesome-memory-game/static/js/runtime-main.f6feb376.js",
-    "runtime-main.js.map": "/awesome-memory-game/static/js/runtime-main.f6feb376.js.map",
+    "runtime-main.js": "/awesome-memory-game/static/js/runtime-main.bde44a89.js",
+    "runtime-main.js.map": "/awesome-memory-game/static/js/runtime-main.bde44a89.js.map",
     "static/js/2.0a01eeb4.chunk.js": "/awesome-memory-game/static/js/2.0a01eeb4.chunk.js",
     "static/js/2.0a01eeb4.chunk.js.map": "/awesome-memory-game/static/js/2.0a01eeb4.chunk.js.map",
     "static/js/3.5c821aa9.chunk.js": "/awesome-memory-game/static/js/3.5c821aa9.chunk.js",
@@ -14,7 +14,7 @@
     "static/js/2.0a01eeb4.chunk.js.LICENSE.txt": "/awesome-memory-game/static/js/2.0a01eeb4.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.f6feb376.js",
+    "static/js/runtime-main.bde44a89.js",
     "static/js/2.0a01eeb4.chunk.js",
     "static/css/main.00857fd4.chunk.css",
     "static/js/main.c29f6aeb.chunk.js"
