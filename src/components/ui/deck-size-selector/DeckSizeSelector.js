@@ -18,7 +18,6 @@ const DeckSizeSelector = () => {
       <select
         className={styles.component}
         onChange={deckSizeChanged}
-        className={styles.component}
         defaultValue={deckSize}
       >
         {deckSizeOptions.map((o) => (
