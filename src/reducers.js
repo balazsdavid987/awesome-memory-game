@@ -9,10 +9,7 @@ const initialState = {
   deckSize: 3,
   moves: 0,
   currentDeck: [],
-  best: { 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0 },
-  imageSet: "",
-  language: "en",
-  theme: "light",
+  best: {},
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {

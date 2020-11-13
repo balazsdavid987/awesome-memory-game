@@ -77,7 +77,7 @@ const Play = () => {
 
     const deckSize = currentDeck.length / 2;
     const currentBest = best[deckSize];
-    if (isOver && (currentBest === 0 || moves < currentBest)) {
+    if (isOver && (currentBest === undefined || moves < currentBest)) {
       dispatch(setBest(deckSize, moves));
     }
   }, [moves, isOver, best, currentDeck, dispatch]);

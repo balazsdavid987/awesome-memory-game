@@ -1,6 +1,6 @@
 import styles from "./Moves.module.scss";
 
-const Moves = ({ current, best }) => {
+const Moves = ({ current, best = "-" }) => {
   return (
     <div className={styles.component}>
       <div>
