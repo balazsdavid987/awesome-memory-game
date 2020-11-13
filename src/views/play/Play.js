@@ -75,11 +75,12 @@ const Play = () => {
       return;
     }
 
+    const deckSize = currentDeck.length / 2;
     const currentBest = best[deckSize];
     if (isOver && (currentBest === 0 || moves < currentBest)) {
       dispatch(setBest(deckSize, moves));
     }
-  }, [moves, isOver, best, deckSize, dispatch]);
+  }, [moves, isOver, best, currentDeck, dispatch]);
 
   const onCardClicked = (id) => {
     if (currentDeck[id].disabled || currentDeck[id].flipped) {
