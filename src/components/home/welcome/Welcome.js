@@ -6,8 +6,9 @@ import { startNewGame } from "../../../actions";
 import styles from "./Welcome.module.scss";
 
 import Button from "../../ui/button/Button";
+import DeckSizeSelector from "../../ui/deck-size-selector/DeckSizeSelector";
 
-import { createDeck } from "../../../utils";
+import { createDeck, isGameOver } from "../../../utils";
 import { cardTypes } from "../../../constants";
 
 const Welcome = () => {
@@ -31,17 +32,17 @@ const Welcome = () => {
     <section>
       <h1 className={styles.title}>Awesome Memory Game</h1>
       <div className={styles.cta}>
-        <Button
-          label="Start new game"
-          type="primary"
-          onClick={onNewGameClicked}
-        />
-        {currentDeck !== undefined && currentDeck.length !== 0 && (
-          <Button
-            label="Continue game"
-            type="secondary"
-            onClick={onContinueGameClicked}
-          />
+        <DeckSizeSelector />
+        <Button label="New game" type="primary" onClick={onNewGameClicked} />
+        {currentDeck && !isGameOver(currentDeck) && (
+          <>
+            <span className={styles.or}>or</span>
+            <Button
+              label="Continue"
+              type="secondary"
+              onClick={onContinueGameClicked}
+            />
+          </>
         )}
       </div>
     </section>

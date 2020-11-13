@@ -15,6 +15,7 @@ import Button from "../../components/ui/button/Button";
 import Grid from "../../components/game/grid/Grid";
 import Moves from "../../components/game/moves/Moves";
 import Card from "../../components/game/card/Card";
+import DeckSizeSelector from "../../components/ui/deck-size-selector/DeckSizeSelector";
 
 import { createDeck, isGameOver } from "../../utils";
 import { cardTypes } from "../../constants";
@@ -91,11 +92,18 @@ const Play = () => {
   return (
     <>
       {currentDeck.length === 0 ? (
-        <Button label="New game" type="primary" onClick={newGame} />
+        <div className={styles.centered}>
+          <Button
+            label={`New game with ${2 * deckSize} cards`}
+            type="primary"
+            onClick={newGame}
+          />
+        </div>
       ) : (
         <div className={styles.header}>
-          <Moves current={moves} best={best[deckSize]} />
+          <Moves current={moves} best={best[currentDeck.length / 2]} />
           <div className={styles.controls}>
+            <DeckSizeSelector />
             <Button label="Restart" type="secondary" onClick={newGame} />
           </div>
         </div>
