@@ -1,10 +1,10 @@
-import { useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
   startNewGame,
-  flipCard,
-  disableCard,
+  flipCards,
+  disableCards,
   incrementMoves,
   setBest,
 } from "../../actions";
@@ -16,7 +16,7 @@ import Grid from "../../components/game/grid/Grid";
 import Moves from "../../components/game/moves/Moves";
 import Card from "../../components/game/card/Card";
 
-import { createDeck } from "../../utils";
+import { createDeck, isGameOver } from "../../utils";
 import { cardTypes } from "../../constants";
 
 const Play = () => {
@@ -25,81 +25,83 @@ const Play = () => {
   const deckSize = useSelector((state) => state.deckSize);
   const moves = useSelector((state) => state.moves);
   const best = useSelector((state) => state.best);
+  const [gridIsDisabled, setGridIsDisabled] = useState(false);
+  const [isOver, setIsOver] = useState(false);
 
-  useEffect(() => {
-    if (currentDeck === undefined || currentDeck.length === 0) {
+  const newGame = () => {
+    const deck = createDeck(cardTypes, deckSize);
+    dispatch(startNewGame(deck));
+    setIsOver(false);
+  };
+
+  const checkFlippedCards = useCallback(() => {
+    const flippedCards = currentDeck.filter(
+      (card) => card.flipped && !card.disabled
+    );
+
+    if (flippedCards.length === 0) {
+      if (isGameOver(currentDeck)) {
+        setIsOver(true);
+      }
+      setGridIsDisabled(false);
       return;
     }
 
-    const remainingCards = currentDeck.filter(
-      (card) => !card.flipped && !card.disabled
-    );
-
-    if (remainingCards.length === 0) {
-      if (best[deckSize] === 0 || moves < best[deckSize]) {
-        dispatch(setBest(deckSize, moves));
+    if (flippedCards.length === 2) {
+      const [first, second] = flippedCards;
+      if (first.image === second.image) {
+        dispatch(disableCards([first.id, second.id]));
+      } else {
+        setGridIsDisabled(true);
+        setTimeout(() => {
+          dispatch(flipCards([first.id, second.id]));
+        }, 1000);
       }
+      dispatch(incrementMoves());
     }
-  });
+  }, [currentDeck, dispatch]);
+
+  useEffect(() => {
+    if (currentDeck.length === 0) {
+      return;
+    }
+
+    checkFlippedCards();
+  }, [currentDeck, checkFlippedCards]);
+
+  useEffect(() => {
+    if (moves === 0) {
+      return;
+    }
+
+    const currentBest = best[deckSize];
+    if (isOver && (currentBest === 0 || moves < currentBest)) {
+      dispatch(setBest(deckSize, moves));
+    }
+  }, [moves, isOver, best, deckSize, dispatch]);
 
   const onCardClicked = (id) => {
     if (currentDeck[id].disabled || currentDeck[id].flipped) {
       return;
     }
 
-    const flippedCard = currentDeck.find(
-      (card) => card.flipped && !card.disabled
-    );
-
-    if (flippedCard !== undefined) {
-      if (flippedCard.image === currentDeck[id].image) {
-        dispatch(flipCard(id));
-        dispatch(disableCard(flippedCard.id));
-        dispatch(disableCard(id));
-      } else {
-        dispatch(flipCard(id));
-
-        // ez nem jó még így ha túl gyorsan kattint a user
-        setTimeout(() => {
-          dispatch(flipCard(flippedCard.id));
-          dispatch(flipCard(id));
-        }, 1000);
-      }
-      dispatch(incrementMoves());
-    } else {
-      dispatch(flipCard(id));
-    }
-  };
-
-  const newGame = () => {
-    const deck = createDeck(cardTypes, deckSize);
-    dispatch(startNewGame(deck));
+    dispatch(flipCards([id]));
   };
 
   return (
     <>
-      <div className={styles.header}>
-        <Moves
-          current={
-            currentDeck === undefined || currentDeck.length === 0 ? "-" : moves
-          }
-          best={
-            currentDeck === undefined || currentDeck.length === 0
-              ? "-"
-              : best[deckSize]
-          }
-        />
-        <div className={styles.controls}>
-          {currentDeck !== undefined && currentDeck.length !== 0 ? (
+      {currentDeck.length === 0 ? (
+        <Button label="New game" type="primary" onClick={newGame} />
+      ) : (
+        <div className={styles.header}>
+          <Moves current={moves} best={best[deckSize]} />
+          <div className={styles.controls}>
             <Button label="Restart" type="secondary" onClick={newGame} />
-          ) : (
-            <Button label="Start new game" type="primary" onClick={newGame} />
-          )}
+          </div>
         </div>
-      </div>
-      <Grid>
-        {currentDeck !== undefined &&
-          currentDeck.length !== 0 &&
+      )}
+      <Grid disabled={gridIsDisabled}>
+        {currentDeck.length !== 0 &&
           currentDeck.map(({ image, flipped, disabled, id }) => (
             <Card
               clickHandler={onCardClicked}

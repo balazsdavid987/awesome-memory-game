@@ -1,7 +1,7 @@
 export const SET_DECK_SIZE = "SET_DECK_SIZE";
 export const START_NEW_GAME = "START_NEW_GAME";
-export const FLIP_CARD = "FLIP_CARD";
-export const DISABLE_CARD = "DISABLE_CARD";
+export const FLIP_CARDS = "FLIP_CARDS";
+export const DISABLE_CARDS = "DISABLE_CARDS";
 export const INCREMENT_MOVES = "INCREMENT_MOVES";
 export const SET_BEST = "SET_BEST";
 
@@ -15,14 +15,14 @@ export const startNewGame = (deck) => ({
   payload: { deck },
 });
 
-export const flipCard = (id) => ({
-  type: FLIP_CARD,
-  payload: { id },
+export const flipCards = (ids) => ({
+  type: FLIP_CARDS,
+  payload: { ids },
 });
 
-export const disableCard = (id) => ({
-  type: DISABLE_CARD,
-  payload: { id },
+export const disableCards = (ids) => ({
+  type: DISABLE_CARDS,
+  payload: { ids },
 });
 
 export const incrementMoves = () => ({

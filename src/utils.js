@@ -12,3 +12,10 @@ export const createDeck = (cardTypes, deckSize) => {
   }));
   return deck;
 };
+
+export const isGameOver = (deck) => {
+  const remainingCards = deck.filter((card) => {
+    return !card.flipped && !card.disabled;
+  });
+  return remainingCards.length === 0;
+};

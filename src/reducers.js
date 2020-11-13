@@ -1,15 +1,13 @@
-import { combineReducers } from "redux";
-
 import { SET_DECK_SIZE } from "./actions";
 import { START_NEW_GAME } from "./actions";
-import { FLIP_CARD } from "./actions";
-import { DISABLE_CARD } from "./actions";
+import { FLIP_CARDS } from "./actions";
+import { DISABLE_CARDS } from "./actions";
 import { INCREMENT_MOVES } from "./actions";
 import { SET_BEST } from "./actions";
 
 const initialState = {
   deckSize: 3,
-  moves: null,
+  moves: 0,
   currentDeck: [],
   best: { 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0 },
   imageSet: "",
@@ -17,23 +15,23 @@ const initialState = {
   theme: "light",
 };
 
-const rootReducer = (state = initialState, action) => {
-  switch (action.type) {
+const rootReducer = (state = initialState, { type, payload }) => {
+  switch (type) {
     case SET_DECK_SIZE:
       return {
         ...state,
-        deckSize: action.payload.size,
+        deckSize: payload.size,
       };
     case START_NEW_GAME: {
       return {
         ...state,
-        currentDeck: [...action.payload.deck],
+        currentDeck: [...payload.deck],
         moves: 0,
       };
     }
-    case FLIP_CARD: {
+    case FLIP_CARDS: {
       const newDeck = state.currentDeck.map((card) =>
-        card.id === action.payload.id
+        payload.ids.includes(card.id)
           ? { ...card, flipped: !card.flipped }
           : { ...card }
       );
@@ -42,9 +40,9 @@ const rootReducer = (state = initialState, action) => {
         currentDeck: newDeck,
       };
     }
-    case DISABLE_CARD: {
+    case DISABLE_CARDS: {
       const newDeck = state.currentDeck.map((card) =>
-        card.id === action.payload.id
+        payload.ids.includes(card.id)
           ? { ...card, disabled: !card.disabled }
           : { ...card }
       );
@@ -60,8 +58,9 @@ const rootReducer = (state = initialState, action) => {
       };
     }
     case SET_BEST: {
+      console.log(payload.moves);
       const newBest = { ...state.best };
-      newBest[action.payload.deckSize] = action.payload.moves;
+      newBest[payload.deckSize] = payload.moves;
 
       return {
         ...state,
